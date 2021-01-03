@@ -4,7 +4,8 @@ public class Ball extends Sprite {
 
 	private int xVelocity = 1, yVelocity = -1;
 	
-	// Constructor
+	// Constructor 
+	// and a test commit
 	public Ball() {
 		// TODO: Set width to Settings.BALL_WIDTH
 		// TODO: Set width to Settings.BALL_HEIGHT
