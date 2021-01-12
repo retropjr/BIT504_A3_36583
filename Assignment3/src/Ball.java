@@ -44,7 +44,7 @@ public class Ball extends Sprite {
 			// DONE: Set x to the right edge of the screen (see the above if condition)
 			x = Settings.WINDOW_WIDTH - Settings.BALL_WIDTH;
 			// DONE: Change the x velocity to make the ball go left
-			// A positive x velocity and the ball is moving right.  Multiplied by -1 to make a negative (left moving) value
+			// A positive x velocity and the ball is moving right.  Multiplied by -1 to make a negative (i.e. left movement) value
 			xVelocity = xVelocity * -1;
 		}
 		
@@ -53,7 +53,7 @@ public class Ball extends Sprite {
 			// DONE: Set y to 0 so it does not leave the screen
 			y = 0;
 			// DONE: Change the y velocity to make the ball go downward
-			// A positive y velocity and the ball is moving up.  Multiplied by -1 to make a negative (downward moving) value
+			// A positive y velocity and the ball is moving down.  Multiplied by -1 to make a negative (i.e. upward movement) value
 			yVelocity = yVelocity * -1;
 		}
 		

@@ -76,12 +76,14 @@ public class BreakoutPanel extends JPanel implements ActionListener, KeyListener
 	
 	
 	private void gameOver() {
-		// TODO: Set screen message
+		// Done: Set screen message
+		screenMessage = "Game Over!";
 		stopGame();
 	}
 	
 	private void gameWon() {
-		// TODO: Set screen message
+		// DONE: Set screen message
+		screenMessage = "Game Won!";
 		stopGame();
 	}
 	
@@ -92,7 +94,7 @@ public class BreakoutPanel extends JPanel implements ActionListener, KeyListener
 	private void collisions() {
 		// Check for loss
 		if(ball.y > 450) {
-			// Game over
+			// life lost
 			livesLeft--;
 			if(livesLeft <= 0) {
 				gameOver();
@@ -164,7 +166,9 @@ public class BreakoutPanel extends JPanel implements ActionListener, KeyListener
         paintBricks(g);
         
         // Draw lives left
-        // TODO: Draw lives left in the top left hand corner
+        // DONE: Draw lives left in the top left hand corner
+        g.setFont(new Font("Arial", Font.BOLD, 18));
+        g.drawString(Integer.toString(livesLeft), Settings.LIVES_POSITION_X, Settings.LIVES_POSITION_Y);
         
         // Draw screen message
         if(screenMessage != null) {
