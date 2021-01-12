@@ -23,11 +23,13 @@ public class BreakoutPanel extends JPanel implements ActionListener, KeyListener
 	
 	public BreakoutPanel(Breakout game) {
 		
-		addKeyListener(this);
-		setFocusable(true);
 		
 		Timer timer = new Timer(5, this);
 		timer.start();
+		
+		//swap?
+		addKeyListener(this);
+		setFocusable(true);
 		
 		// DONE: Create a new ball object and assign it to the appropriate variable
 		ball = new Ball();

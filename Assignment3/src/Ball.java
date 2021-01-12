@@ -26,32 +26,32 @@ public class Ball extends Sprite {
 	}
 	
 	public void update() {
-		x += xVelocity;
+		setX(getX() + xVelocity);
 		// DONE: Increase the y variable by yVelocity (see above)
-		y += yVelocity;
+		setY(getY() + yVelocity);
 		
 		// Bounce off left side of screen
-		if(x <= 0) {
+		if(getX() <= 0) {
 			// DONE: Set x to 0 so it does not leave the screen
-			x = 0;
+			setX(0);
 			// DONE: Change the x velocity to make the ball go right
 			// A negative x velocity and the ball is moving left.  Multiplied by -1 to make a positive (right moving) value
 			xVelocity = xVelocity * -1;
 		}
 		
 		// Bounce off right side of screen
-		if(x >= Settings.WINDOW_WIDTH - Settings.BALL_WIDTH) {
+		if(getX() >= Settings.WINDOW_WIDTH - Settings.BALL_WIDTH) {
 			// DONE: Set x to the right edge of the screen (see the above if condition)
-			x = Settings.WINDOW_WIDTH - Settings.BALL_WIDTH;
+			setX(Settings.WINDOW_WIDTH - Settings.BALL_WIDTH);
 			// DONE: Change the x velocity to make the ball go left
 			// A positive x velocity and the ball is moving right.  Multiplied by -1 to make a negative (i.e. left movement) value
 			xVelocity = xVelocity * -1;
 		}
 		
 		// Bounce off top of screen
-		if(y <= 0) {
+		if(getY() <= 0) {
 			// DONE: Set y to 0 so it does not leave the screen
-			y = 0;
+			setY(0);
 			// DONE: Change the y velocity to make the ball go downward
 			// A positive y velocity and the ball is moving down.  Multiplied by -1 to make a negative (i.e. upward movement) value
 			yVelocity = yVelocity * -1;
@@ -61,11 +61,11 @@ public class Ball extends Sprite {
 	
 	public void setXVelocity(int x) {
 		// DONE: Set the x velocity
-		this.xVelocity = x;
+		xVelocity = x;
 	}
 	public void setYVelocity(int y) {
 		// DONE: Set the y velocity
-		this.yVelocity = y;
+		yVelocity = y;
 	}
 	
 	public int getXVelocity() {
@@ -76,6 +76,6 @@ public class Ball extends Sprite {
 	}
 	
 	public void paint(Graphics g) {
-		g.fillOval(x, y, Settings.BALL_WIDTH, Settings.BALL_HEIGHT);
+		g.fillOval(getX(), getY(), getWidth(), getHeight());
 	}
 }
