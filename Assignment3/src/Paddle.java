@@ -5,14 +5,21 @@ public class Paddle extends Sprite {
 	private int xVelocity;
 	
 	public Paddle() {
-		// TODO: Set width to Settings.PADDLE_WIDTH
-		// TODO: Set width to Settings.PADDLE_HEIGHT
-		// TODO: Call resetPosition
+		// DONE: Set width to Settings.PADDLE_WIDTH
+		width = Settings.PADDLE_WIDTH;
+		// DONE: Set width to Settings.PADDLE_HEIGHT
+		height = Settings.PADDLE_HEIGHT;
+		// DONE: Call resetPosition
+		resetPosition();
 	}
 	
 	public void resetPosition() {
-		// TODO: Set initial position x and y (use INITIAL_PADDLE_X/Y)
+		// DONE: Set initial position x and y (use INITIAL_PADDLE_X/Y)
 		// Note: Check Ball.java for a hint
+		setX(Settings.INITIAL_PADDLE_X);
+		// DONE: Set the balls y by using the INITIAL_BALL_Y (see above)
+		setY(Settings.INITIAL_PADDLE_Y);
+		
 	}
 	
 	public void update() {
@@ -28,6 +35,7 @@ public class Paddle extends Sprite {
 	}
 	
 	public void setXVelocity(int vel) {
-		// TODO: Set x velocity
+		// DONE: Set x velocity
+		xVelocity = vel;
 	}
 }
