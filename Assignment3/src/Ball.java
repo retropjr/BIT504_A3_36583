@@ -7,9 +7,12 @@ public class Ball extends Sprite {
 	// Constructor 
 	// and a test commit
 	public Ball() {
-		// TODO: Set width to Settings.BALL_WIDTH
-		// TODO: Set width to Settings.BALL_HEIGHT
+		// Done: Set width to Settings.BALL_WIDTH
+		setWidth(Settings.BALL_WIDTH);
+		// Done: Set height to Settings.BALL_HEIGHT
+		setHeight(Settings.BALL_HEIGHT);
 		// TODO: Call resetPosition
+		resetPosition();
 	}
 	
 	/**
@@ -18,12 +21,14 @@ public class Ball extends Sprite {
 	 */
 	public void resetPosition() {
 		setX(Settings.INITIAL_BALL_X);
-		// TODO: Set the balls y by using the INITIAL_BALL_Y (see above)
+		// Done: Set the balls y by using the INITIAL_BALL_Y (see above)
+		setY(Settings.INITIAL_BALL_Y);
 	}
 	
 	public void update() {
 		x += xVelocity;
-		// TODO: Increase the y variable by yVelocity (see above)
+		// Done: Increase the y variable by yVelocity (see above)
+		y += yVelocity;
 		
 		// Bounce off left side of screen
 		if(x <= 0) {
