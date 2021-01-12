@@ -65,13 +65,15 @@ public class BreakoutPanel extends JPanel implements ActionListener, KeyListener
 	private void update() {
 		if(gameRunning) {
 			// DONE: Update the ball 
-			ball.resetPosition();
-			// TODO: Update the paddle
-			
+			ball.update();
+			// DONE: Update the paddle
+			paddle.update();
 			collisions();
 			repaint();
 		}
 	}
+	
+	
 	
 	private void gameOver() {
 		// TODO: Set screen message
@@ -198,6 +200,7 @@ public class BreakoutPanel extends JPanel implements ActionListener, KeyListener
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		update();
+		
 	}
 
 }
