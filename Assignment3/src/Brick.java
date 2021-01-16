@@ -10,8 +10,8 @@ public class Brick extends Sprite {
 		// DONE: Set y using the parameter
 		this.y = y;
 		// TODO: Set the width and height of the brick using Settings.BRICK_WIDTH/HEIGHT
-		this.width = Settings.BALL_WIDTH;
-		this.height = Settings.BALL_WIDTH;
+		this.width = Settings.BRICK_WIDTH;
+		this.height = Settings.BRICK_WIDTH;
 	}
 
 	public boolean isBroken() {
