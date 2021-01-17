@@ -1,3 +1,4 @@
+
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Point;
@@ -20,11 +21,12 @@ public class BreakoutPanel extends JPanel implements ActionListener, KeyListener
 	private Paddle paddle;
 	private Brick bricks[];
 	
+	
+	
+	// conversion to pong public BreakoutPanel(Breakout game) {
 	public BreakoutPanel(Breakout game) {
-		
 		addKeyListener(this);
 		setFocusable(true);
-		
 		Timer timer = new Timer(5, this);
 		timer.start();
 		
@@ -196,12 +198,12 @@ public class BreakoutPanel extends JPanel implements ActionListener, KeyListener
 	}
 
 	@Override
-	public void keyTyped(KeyEvent arg0) {
-		
+	public void keyTyped(KeyEvent event) {
+	
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent arg0) {
+	public void actionPerformed(ActionEvent event) {
 		update();
 		
 	}

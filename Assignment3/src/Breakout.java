@@ -19,8 +19,10 @@ public class Breakout extends JFrame{
 		// DONE: Set visible to true
 		setVisible(true);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        panel = new BreakoutPanel(this);
-        add(panel);
+       panel = new BreakoutPanel(this);
+       panel.setBounds(0, 0, Settings.WINDOW_WIDTH, Settings.BALL_HEIGHT);
+       add(panel);
+       
 	}
 
 	public static void main(String[] args) {
