@@ -22,8 +22,6 @@ public class BreakoutPanel extends JPanel implements ActionListener, KeyListener
 	private Brick bricks[];
 	
 	
-	
-	// conversion to pong public BreakoutPanel(Breakout game) {
 	public BreakoutPanel(Breakout game) {
 		addKeyListener(this);
 		setFocusable(true);
@@ -38,6 +36,7 @@ public class BreakoutPanel extends JPanel implements ActionListener, KeyListener
 		bricks = new Brick[Settings.TOTAL_BRICKS];
 		// DONE: Call the createBricks() method
 		createBricks();
+		// needed? update();
 	}
 	
 	private void createBricks() {
@@ -46,7 +45,8 @@ public class BreakoutPanel extends JPanel implements ActionListener, KeyListener
 		int y_space = 0;
 		for(int x = 0; x < 4; x++) {
 			for(int y = 0; y < 5; y++) {
-				bricks[counter] = new Brick((x * Settings.BRICK_WIDTH) + Settings.BRICK_HORI_PADDING + x_space, (y * Settings.BRICK_HEIGHT) + Settings.BRICK_VERT_PADDING + y_space);
+				bricks[counter] = new Brick((x * Settings.BRICK_WIDTH) + Settings.BRICK_HORI_PADDING + x_space, 
+											(y * Settings.BRICK_HEIGHT) + Settings.BRICK_VERT_PADDING + y_space);
 				counter++;
 				y_space++;
 			}
@@ -169,7 +169,7 @@ public class BreakoutPanel extends JPanel implements ActionListener, KeyListener
         // Draw lives left
         // DONE: Draw lives left in the top left hand corner
         g.setFont(new Font("Arial", Font.BOLD, 18));
-        g.drawString(Integer.toString(livesLeft), Settings.LIVES_POSITION_X, Settings.LIVES_POSITION_Y);
+        g.drawString("Lives: " + Integer.toString(livesLeft), Settings.LIVES_POSITION_X, Settings.LIVES_POSITION_Y);
         
         // Draw screen message
         if(screenMessage != null) {
