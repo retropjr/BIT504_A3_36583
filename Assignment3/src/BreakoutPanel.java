@@ -1,4 +1,5 @@
 
+import java.awt.*;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Point;
@@ -14,20 +15,27 @@ public class BreakoutPanel extends JPanel implements ActionListener, KeyListener
 	
 	static final long serialVersionUID = 2L;
 
-	private boolean gameRunning = true;
+	
 	private int livesLeft = 3;
 	private String screenMessage = "";
 	private Ball ball;
 	private Paddle paddle;
 	private Brick bricks[];
 	
+	GameState gameState = GameState.Initialising;
 	
-	public BreakoutPanel(Breakout game) {
-		addKeyListener(this);
-		setFocusable(true);
+	
+	//constructor
+	public BreakoutPanel() {
+		setBackground(Color.WHITE);
+		setSize(Settings.WINDOW_WIDTH, Settings.WINDOW_HEIGHT);
 		Timer timer = new Timer(5, this);
 		timer.start();
-		
+		addKeyListener(this);
+		setFocusable(true);
+	}
+	
+	public void createObjects() {
 		// DONE: Create a new ball object and assign it to the appropriate variable
 		ball = new Ball();
 		// DONE: Create a new paddle object and assign it to the appropriate variable
@@ -36,7 +44,6 @@ public class BreakoutPanel extends JPanel implements ActionListener, KeyListener
 		bricks = new Brick[Settings.TOTAL_BRICKS];
 		// DONE: Call the createBricks() method
 		createBricks();
-		// needed? update();
 	}
 	
 	private void createBricks() {
@@ -55,57 +62,52 @@ public class BreakoutPanel extends JPanel implements ActionListener, KeyListener
 		}
 	}
 	
-	private void paintBricks(Graphics g) {
-		
-		// TODO: Loop through the bricks and call the paint() method
-		for(int i = 0; i < Settings.TOTAL_BRICKS; i++) {
-			bricks[i].paint(g);
-			}
-	}
+	
 	
 	private void update() {
-		if(gameRunning) {
-			// DONE: Update the ball 
-			ball.update();
-			// DONE: Update the paddle
-			paddle.update();
-			collisions();
-			repaint();
+		switch(gameState) {
+			case Initialising: {
+				createObjects();
+				gameState = GameState.Playing;
+				paddle.setXVelocity(0);
+				ball.setXVelocity(1);
+				ball.setYVelocity(-1);
+				break;
+			}
+			case Playing: {
+				ball.update();
+				paddle.update();
+				gameOver();
+				gameWon();
+				collisions();
+				repaint();
+				break;
+			}
+			case GameOver: {
+				break;
+			}
 		}
 	}
 	
 	
 	
 	private void gameOver() {
-		// Done: Set screen message
-		screenMessage = "Game Over!";
-		stopGame();
+		// Check for loss
+				if(ball.y > 450) {
+					// life lost
+					livesLeft--;
+					if(livesLeft <= 0) {
+						screenMessage = "Game Over!";
+						gameState = GameState.GameOver;
+						return;
+					} else {
+						ball.resetPosition();
+						ball.setYVelocity(-1);
+					}
+				}
 	}
 	
 	private void gameWon() {
-		// DONE: Set screen message
-		screenMessage = "Game Won!";
-		stopGame();
-	}
-	
-	private void stopGame() {
-		gameRunning = false;
-	}
-	
-	private void collisions() {
-		// Check for loss
-		if(ball.y > 450) {
-			// life lost
-			livesLeft--;
-			if(livesLeft <= 0) {
-				gameOver();
-				return;
-			} else {
-				ball.resetPosition();
-				ball.setYVelocity(-1);
-			}
-		}
-		
 		// Check for win
 		boolean bricksLeft = false;
 		for(int i = 0; i < bricks.length; i++) {
@@ -114,13 +116,17 @@ public class BreakoutPanel extends JPanel implements ActionListener, KeyListener
 				// Brick was found, close loop
 				bricksLeft = true;
 				break;
+				}
 			}
-		}
-		if(!bricksLeft) {
-			gameWon();
-			return;
-		}
-		
+			if(!bricksLeft) {
+				screenMessage = "Game Won!";
+				gameState = GameState.GameOver;
+				return;
+				}
+	}
+	
+	
+	private void collisions() {	
 		// Check collisions
 		if(ball.getRectangle().intersects(paddle.getRectangle())) {
 			// Simplified touching of paddle
@@ -161,9 +167,9 @@ public class BreakoutPanel extends JPanel implements ActionListener, KeyListener
 	@Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-
-        ball.paint(g);
-        paddle.paint(g);
+        if(gameState != GameState.Initialising) {
+        paintBall(g);
+        paintPaddle(g);
         paintBricks(g);
         
         // Draw lives left
@@ -176,8 +182,26 @@ public class BreakoutPanel extends JPanel implements ActionListener, KeyListener
         	g.setFont(new Font("Arial", Font.BOLD, 18));
         	int messageWidth = g.getFontMetrics().stringWidth(screenMessage);
         	g.drawString(screenMessage, (Settings.WINDOW_WIDTH / 2) - (messageWidth / 2), Settings.MESSAGE_POSITION);
+        	}
         }
-    }
+     }
+	
+    public void paintBall(Graphics g) {
+		g.fillOval(ball.getX(), ball.getY(), ball.getWidth(), ball.getHeight());
+	}
+    
+    public void paintPaddle(Graphics g) {
+		g.fillRect(paddle.getX(), paddle.getY(), paddle.getWidth(), paddle.getHeight());
+	}
+    
+    private void paintBricks(Graphics g) {
+		// DONE: Loop through the bricks and call the paint() method
+		for(int i = 0; i < Settings.TOTAL_BRICKS; i++) {
+			bricks[i].paint(g);
+			}
+	}
+        
+        
 
 	@Override
 	public void keyPressed(KeyEvent event) {
