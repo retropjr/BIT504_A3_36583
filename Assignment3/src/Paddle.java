@@ -27,7 +27,7 @@ public class Paddle extends Sprite {
 		// This can be done using two if statements (one for the left side of the screen and one for the right)
 		if (getX() < 0) {
 			setX(0);
-		} else if(getX() + Settings.PADDLE_WIDTH > Settings.WINDOW_WIDTH) {
+		} else if(getX() >=  Settings.WINDOW_WIDTH - Settings.PADDLE_WIDTH) {
 			setX(Settings.WINDOW_WIDTH - Settings.PADDLE_WIDTH);
 		}
 
