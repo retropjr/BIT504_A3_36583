@@ -1,17 +1,15 @@
-import java.awt.Graphics;
-
 public class Brick extends Sprite {
 	
 	private boolean broken = false;
 	
-	public Brick(int x, int y) {
+	public Brick(int xCoordinate, int yCoordinate) {
 		// DONE: Set x using the parameter
-		this.x = x;
+		x = xCoordinate;
 		// DONE: Set y using the parameter
-		this.y = y;
+		y = yCoordinate;
 		// TODO: Set the width and height of the brick using Settings.BRICK_WIDTH/HEIGHT
-		this.width = Settings.BRICK_WIDTH;
-		this.height = Settings.BRICK_WIDTH;
+		width = Settings.BRICK_WIDTH;
+		height = Settings.BRICK_HEIGHT;
 	}
 
 	public boolean isBroken() {
@@ -22,9 +20,5 @@ public class Brick extends Sprite {
 		broken = b;
 	}
 	
-	public void paint(Graphics g) {
-		if(!broken) {
-			g.fillRect(x, y, Settings.BRICK_WIDTH, Settings.BRICK_HEIGHT);
-		}
-	}
+	
 }

@@ -1,11 +1,8 @@
-import java.awt.Graphics;
-
 public class Ball extends Sprite {
 
 	private int xVelocity = 1, yVelocity = -1;
 	
 	// Constructor 
-	// and a test commit
 	public Ball() {
 		// DONE: Set width to Settings.BALL_WIDTH
 		setWidth(Settings.BALL_WIDTH);
@@ -75,8 +72,5 @@ public class Ball extends Sprite {
 		return yVelocity;	// TODO: Return the y velocity
 	}
 	
-	public void paint(Graphics g) {
-		g.fillOval(getX(), getY(), getWidth(), getHeight());
-		
-	}
+	
 }

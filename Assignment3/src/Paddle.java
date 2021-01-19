@@ -1,5 +1,3 @@
-import java.awt.Graphics;
-
 public class Paddle extends Sprite {
 
 	private int xVelocity = 0;
@@ -35,9 +33,7 @@ public class Paddle extends Sprite {
 
 	}
 	
-	public void paint(Graphics g) {
-		g.fillRect(getX(), getY(), getWidth(), getHeight());
-	}
+	
 	
 	public void setXVelocity(int vel) {
 		// DONE: Set x velocity
