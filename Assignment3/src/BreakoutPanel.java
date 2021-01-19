@@ -1,4 +1,3 @@
-
 import java.awt.*;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -197,11 +196,13 @@ public class BreakoutPanel extends JPanel implements ActionListener, KeyListener
     private void paintBricks(Graphics g) {
 		// DONE: Loop through the bricks and call the paint() method
 		for(int i = 0; i < Settings.TOTAL_BRICKS; i++) {
-			bricks[i].paint(g);
+			if (!bricks[i].isBroken()) {
+				g.fillRect(bricks[i].getX(), bricks[i].getY(), bricks[i].getWidth(), bricks[i].getHeight());
 			}
+		}
 	}
         
-        
+    
 
 	@Override
 	public void keyPressed(KeyEvent event) {
@@ -229,7 +230,7 @@ public class BreakoutPanel extends JPanel implements ActionListener, KeyListener
 	@Override
 	public void actionPerformed(ActionEvent event) {
 		update();
-		
+		repaint();
 	}
 
 }

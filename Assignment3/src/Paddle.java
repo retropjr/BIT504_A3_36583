@@ -1,5 +1,3 @@
-import java.awt.Graphics;
-
 public class Paddle extends Sprite {
 
 	private int xVelocity = 0;
