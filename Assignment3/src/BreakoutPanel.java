@@ -68,17 +68,16 @@ public class BreakoutPanel extends JPanel implements ActionListener, KeyListener
 			case Initialising: {
 				createObjects();
 				gameState = GameState.Playing;
-				paddle.setXVelocity(0);
-				ball.setXVelocity(1);
-				ball.setYVelocity(-1);
 				break;
 			}
 			case Playing: {
-				ball.update();
-				paddle.update();
+				moveObject(ball);
+				checkWallBounce(ball);
+				checkPaddleBounce(ball);
+				moveObject(paddle);
 				gameOver();
 				gameWon();
-				collisions();
+				checkBrickCollision(ball);
 				repaint();
 				break;
 			}
@@ -88,11 +87,53 @@ public class BreakoutPanel extends JPanel implements ActionListener, KeyListener
 		}
 	}
 	
+	private void moveObject(Sprite object) {
+		object.setX(object.getX() + object.getXVelocity(), Settings.WINDOW_WIDTH);
+		object.setY(object.getY() + object.getYVelocity(), Settings.WINDOW_HEIGHT);
+	}
+	
+	private void checkWallBounce(Sprite object) {
+		// Bounce off left side of screen
+		if(object.getX() <= 0) {
+			
+			// Change the x velocity to make the object go right
+			// A negative x velocity and the object is moving left.  Multiplied by -1 to make a positive (right moving) value
+			object.setXVelocity(object.getXVelocity() * -1);
+		}
+		
+		// Bounce off right side of screen
+		if(object.getX() >= Settings.WINDOW_WIDTH - object.getWidth()) {
+			// DONE: Set x to the right edge of the screen (see the above if condition)
+			object.setX(Settings.WINDOW_WIDTH - object.getWidth(), Settings.WINDOW_WIDTH );
+			// DONE: Change the x velocity to make the object go left
+			// A positive x velocity and the ball is moving right.  Multiplied by -1 to make a negative (i.e. left movement) value
+			object.setXVelocity(object.getXVelocity() * -1);
+			
+		}
+		
+		// Bounce off top of screen
+		if(object.getY() <= 0) {
+			// DONE: Set y to 0 so it does not leave the screen
+			object.setY(0, Settings.WINDOW_HEIGHT);
+			// DONE: Change the y velocity to make the object go downward
+			// A negative y velocity and the object is moving up.  Multiplied by -1 to make a positive (i.e. downward movement) value
+			object.setYVelocity(object.getYVelocity() * -1);
+			
+		}
+	}
+	
+	private void checkPaddleBounce(Sprite object) {
+		if(object.getRectangle().intersects(paddle.getRectangle())) {
+			// Simplified touching of paddle
+			// Proper game would change angle of ball depending on where it hit the paddle
+			object.setYVelocity(object.getYVelocity() * -1);
+		}
+	}
 	
 	
 	private void gameOver() {
 		// Check for loss
-				if(ball.y > 450) {
+				if(ball.getY() > 450) {
 					// life lost
 					livesLeft--;
 					if(livesLeft <= 0) {
@@ -125,20 +166,15 @@ public class BreakoutPanel extends JPanel implements ActionListener, KeyListener
 	}
 	
 	
-	private void collisions() {	
+	private void checkBrickCollision(Sprite object) {	
 		// Check collisions
-		if(ball.getRectangle().intersects(paddle.getRectangle())) {
-			// Simplified touching of paddle
-			// Proper game would change angle of ball depending on where it hit the paddle
-			ball.setYVelocity(-1);
-		}
-		
+				
 		for(int i = 0; i < bricks.length; i++) {
-			if (ball.getRectangle().intersects(bricks[i].getRectangle())) {
-				int ballLeft = (int) ball.getRectangle().getMinX();
-	            int ballHeight = (int) ball.getRectangle().getHeight();
-	            int ballWidth = (int) ball.getRectangle().getWidth();
-	            int ballTop = (int) ball.getRectangle().getMinY();
+			if (object.getRectangle().intersects(bricks[i].getRectangle())) {
+				int ballLeft = (int) object.getRectangle().getMinX();
+	            int ballHeight = (int) object.getRectangle().getHeight();
+	            int ballWidth = (int) object.getRectangle().getWidth();
+	            int ballTop = (int) object.getRectangle().getMinY();
 
 	            Point pointRight = new Point(ballLeft + ballWidth + 1, ballTop);
 	            Point pointLeft = new Point(ballLeft - 1, ballTop);
@@ -147,15 +183,15 @@ public class BreakoutPanel extends JPanel implements ActionListener, KeyListener
 
 	            if (!bricks[i].isBroken()) {
 	                if (bricks[i].getRectangle().contains(pointRight)) {
-	                    ball.setXVelocity(-1);
+	                    object.setXVelocity(-1);
 	                } else if (bricks[i].getRectangle().contains(pointLeft)) {
-	                    ball.setXVelocity(1);
+	                    object.setXVelocity(1);
 	                }
 
 	                if (bricks[i].getRectangle().contains(pointTop)) {
-	                    ball.setYVelocity(1);
+	                    object.setYVelocity(1);
 	                } else if (bricks[i].getRectangle().contains(pointBottom)) {
-	                    ball.setYVelocity(-1);
+	                    object.setYVelocity(-1);
 	                }
 	                bricks[i].setBroken(true);
 	            }

@@ -1,26 +1,29 @@
 public class Ball extends Sprite {
-
-	private int xVelocity = 1, yVelocity = -1;
 	
 	// Constructor 
 	public Ball() {
+		setInitialXPosition(Settings.INITIAL_BALL_X);
+		setInitialYPosition(Settings.INITIAL_BALL_Y);
 		// DONE: Set width to Settings.BALL_WIDTH
 		setWidth(Settings.BALL_WIDTH);
 		// DONE: Set height to Settings.BALL_HEIGHT
 		setHeight(Settings.BALL_HEIGHT);
 		// DONE: Call resetPosition
+		setXVelocity(1);
+		setYVelocity(-1);
 		resetPosition();
 	}
 	
 	/**
 	 * Resets the ball to the initial position
 	 * Uses Settings.INITIAL_BALL_X/Y to set the position of the ball
-	 */
+	 
 	public void resetPosition() {
 		setX(Settings.INITIAL_BALL_X);
 		// DONE: Set the balls y by using the INITIAL_BALL_Y (see above)
 		setY(Settings.INITIAL_BALL_Y);
 	}
+	
 	
 	public void update() {
 		setX(getX() + xVelocity);
@@ -72,5 +75,5 @@ public class Ball extends Sprite {
 		return yVelocity;	// TODO: Return the y velocity
 	}
 	
-	
+	*/
 }
