@@ -14,28 +14,4 @@ public class Paddle extends Sprite {
 			setYVelocity(0);
 			resetPosition();
 		}
-
-	/*
-	
-	public void update() {
-		setX(getX() + xVelocity);
-		
-		// DONE: Prevent the paddle from moving outside of the screen
-		// This can be done using two if statements (one for the left side of the screen and one for the right)
-		if (getX() < 0) {
-			setX(0);
-		} else if(getX() + Settings.PADDLE_WIDTH > Settings.WINDOW_WIDTH) {
-			setX(Settings.WINDOW_WIDTH - Settings.PADDLE_WIDTH);
-		}
-
-	}
-	
-	
-	
-	public void setXVelocity(int vel) {
-		// DONE: Set x velocity
-		xVelocity = vel;
-	}
-	
-	*/
 }

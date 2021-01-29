@@ -34,6 +34,30 @@ public class BreakoutPanel extends JPanel implements ActionListener, KeyListener
 		setFocusable(true);
 	}
 	
+	private void update() {
+		switch(gameState) {
+			case Initialising: {
+				createObjects();
+				gameState = GameState.Playing;
+				break;
+			}
+			case Playing: {
+				moveObject(ball);
+				checkWallBounce(ball);
+				checkPaddleBounce(ball);
+				moveObject(paddle);
+				gameOver();
+				gameWon();
+				checkBrickCollision(ball);
+				repaint();
+				break;
+			}
+			case GameOver: {
+				break;
+			}
+		}
+	}
+	
 	public void createObjects() {
 		// DONE: Create a new ball object and assign it to the appropriate variable
 		ball = new Ball();
@@ -63,29 +87,7 @@ public class BreakoutPanel extends JPanel implements ActionListener, KeyListener
 	
 	
 	
-	private void update() {
-		switch(gameState) {
-			case Initialising: {
-				createObjects();
-				gameState = GameState.Playing;
-				break;
-			}
-			case Playing: {
-				moveObject(ball);
-				checkWallBounce(ball);
-				checkPaddleBounce(ball);
-				moveObject(paddle);
-				gameOver();
-				gameWon();
-				checkBrickCollision(ball);
-				repaint();
-				break;
-			}
-			case GameOver: {
-				break;
-			}
-		}
-	}
+	
 	
 	private void moveObject(Sprite object) {
 		object.setX(object.getX() + object.getXVelocity(), Settings.WINDOW_WIDTH);

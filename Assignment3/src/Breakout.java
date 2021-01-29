@@ -11,11 +11,20 @@ public class Breakout extends JFrame{
 		setTitle(Settings.WINDOW_NAME);
 		// DONE: Set resizable to false
 		setResizable(false);
-		// DONE: Set visible to true
-		setVisible(true);
+		
 	    setDefaultCloseOperation(EXIT_ON_CLOSE);
 	    
+	    
+	    //This is the key statement. BreakoutPanel class is responsible for setting up
+  		//all the game parameters including bricks, ball, paddle and the panel itself. 
+  		//Remember that panel object of class BreakoutPanel is actually a JPanel and implements
+  		//action listener. So it contains all the visual information for a panel to be displayed.
+  		//Hence before displaying the panel using setVisible(true), we need to add the current 
+  		//active panel. That is why we need to move the setVisible to the END AFTER the add(panel)
 	    add(new BreakoutPanel());
+	    
+		// DONE: Set visible to true
+		setVisible(true);
 	}
 
 	public static void main(String[] args) {
