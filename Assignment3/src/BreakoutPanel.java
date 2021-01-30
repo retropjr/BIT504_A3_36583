@@ -84,11 +84,7 @@ public class BreakoutPanel extends JPanel implements ActionListener, KeyListener
 			y_space = 0;
 		}
 	}
-	
-	
-	
-	
-	
+		
 	private void moveObject(Sprite object) {
 		object.setX(object.getX() + object.getXVelocity(), Settings.WINDOW_WIDTH);
 		object.setY(object.getY() + object.getYVelocity(), Settings.WINDOW_HEIGHT);

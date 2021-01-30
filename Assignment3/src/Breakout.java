@@ -20,7 +20,7 @@ public class Breakout extends JFrame{
   		//Remember that panel object of class BreakoutPanel is actually a JPanel and implements
   		//action listener. So it contains all the visual information for a panel to be displayed.
   		//Hence before displaying the panel using setVisible(true), we need to add the current 
-  		//active panel. That is why we need to move the setVisible to the END AFTER the add(panel)
+  		//active panel. That is why we need to move the setVisible to AFTER the add(panel)
 	    add(new BreakoutPanel());
 	    
 		// DONE: Set visible to true

@@ -53,7 +53,6 @@ public class Sprite {
 	
 	
 	// Getter methods
-	// Note: Change the "0" to the correct variable
 	public int getX() { 
 		return x;	// DONE: Return correct value
 	}
@@ -83,8 +82,6 @@ public class Sprite {
 		setX(initialXPosition, Settings.WINDOW_WIDTH);
 		setY(initialYPosition, Settings.WINDOW_HEIGHT);
 	}
-
-	
 	
 	Rectangle getRectangle() {
 		return new Rectangle(x, y, width, height);
