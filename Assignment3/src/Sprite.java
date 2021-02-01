@@ -1,3 +1,6 @@
+//Open Polytechnic course BIT504 Assignment 3
+//Richard Porter 36583
+
 import java.awt.Rectangle;
 
 public class Sprite {

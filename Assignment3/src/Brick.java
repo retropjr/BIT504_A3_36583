@@ -1,3 +1,6 @@
+//Open Polytechnic course BIT504 Assignment 3
+//Richard Porter 36583
+
 public class Brick extends Sprite {
 	
 	private boolean broken = false;

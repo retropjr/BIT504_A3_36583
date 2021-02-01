@@ -1,3 +1,6 @@
+//Open Polytechnic course BIT504 Assignment 3
+//Richard Porter 36583
+
 public class Paddle extends Sprite {
 
 	
@@ -9,9 +12,10 @@ public class Paddle extends Sprite {
 			setWidth(Settings.PADDLE_WIDTH);
 			// DONE: Set height to Settings.BALL_HEIGHT
 			setHeight(Settings.PADDLE_HEIGHT);
-			// DONE: Call resetPosition
+			// Set the paddle's initial velocity
 			setXVelocity(0);
 			setYVelocity(0);
+			// DONE: Call resetPosition
 			resetPosition();
 		}
 }

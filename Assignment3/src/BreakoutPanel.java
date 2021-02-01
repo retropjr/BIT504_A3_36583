@@ -1,3 +1,6 @@
+//Open Polytechnic course BIT504 Assignment 3
+//Richard Porter 36583
+
 import java.awt.*;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -14,7 +17,6 @@ public class BreakoutPanel extends JPanel implements ActionListener, KeyListener
 	
 	static final long serialVersionUID = 2L;
 
-	
 	private int livesLeft = 3;
 	private String screenMessage = "";
 	private Ball ball;
@@ -22,7 +24,6 @@ public class BreakoutPanel extends JPanel implements ActionListener, KeyListener
 	private Brick bricks[];
 	
 	GameState gameState = GameState.Initialising;
-	
 	
 	//constructor
 	public BreakoutPanel() {
@@ -63,7 +64,7 @@ public class BreakoutPanel extends JPanel implements ActionListener, KeyListener
 		ball = new Ball();
 		// DONE: Create a new paddle object and assign it to the appropriate variable
 		paddle = new Paddle();
-		// DONE: Create a new bricks array (Use Settings.TOTAL_BRICKS)
+		// DONE: Create a new bricks array.  Use Settings.TOTAL_BRICKS for the size of the array.
 		bricks = new Brick[Settings.TOTAL_BRICKS];
 		// DONE: Call the createBricks() method
 		createBricks();
@@ -75,6 +76,8 @@ public class BreakoutPanel extends JPanel implements ActionListener, KeyListener
 		int y_space = 0;
 		for(int x = 0; x < 4; x++) {
 			for(int y = 0; y < 5; y++) {
+				//Each brick has a unique position within the BreakoutPanel.  These loops calculate that position.  Adding padding between bricks
+				//and in this case, creating a 4 brick X 5 brick rectangle  i.e. 20 bricks.
 				bricks[counter] = new Brick((x * Settings.BRICK_WIDTH) + Settings.BRICK_HORI_PADDING + x_space, 
 											(y * Settings.BRICK_HEIGHT) + Settings.BRICK_VERT_PADDING + y_space);
 				counter++;
@@ -123,7 +126,7 @@ public class BreakoutPanel extends JPanel implements ActionListener, KeyListener
 	private void checkPaddleBounce(Sprite object) {
 		if(object.getRectangle().intersects(paddle.getRectangle())) {
 			// Simplified touching of paddle
-			// Proper game would change angle of ball depending on where it hit the paddle
+			// Ideally game would change angle of ball depending on where it hit the paddle
 			object.setYVelocity(object.getYVelocity() * -1);
 		}
 	}
@@ -132,7 +135,7 @@ public class BreakoutPanel extends JPanel implements ActionListener, KeyListener
 	private void gameOver() {
 		// Check for loss
 				if(ball.getY() > 450) {
-					// life lost
+					// life lost, ball has got past paddle at bottom of screen.
 					livesLeft--;
 					if(livesLeft <= 0) {
 						screenMessage = "Game Over!";
@@ -165,8 +168,7 @@ public class BreakoutPanel extends JPanel implements ActionListener, KeyListener
 	
 	
 	private void checkBrickCollision(Sprite object) {	
-		// Check collisions
-				
+		// Check for collision of a sprite object with a brick	
 		for(int i = 0; i < bricks.length; i++) {
 			if (object.getRectangle().intersects(bricks[i].getRectangle())) {
 				int ballLeft = (int) object.getRectangle().getMinX();
@@ -206,7 +208,7 @@ public class BreakoutPanel extends JPanel implements ActionListener, KeyListener
         paintBricks(g);
         
         // Draw lives left
-        // DONE: Draw lives left in the top left hand corner
+        // DONE: Draw lives left in the top left hand corner of panel
         g.setFont(new Font("Arial", Font.BOLD, 18));
         g.drawString("Lives: " + Integer.toString(livesLeft), Settings.LIVES_POSITION_X, Settings.LIVES_POSITION_Y);
         
